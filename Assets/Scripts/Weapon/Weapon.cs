@@ -7,7 +7,6 @@ public class Weapon : MonoBehaviour
 {
     // These variables will be used by all subclasses of Weapon.
     public Rigidbody2D rb; // The rigidbody component of the weapon.
-    public SpriteRenderer sr; // The sprite renderer component of the weapon.
     public BoxCollider2D boxCollider; // The box collider component of the weapon.
 
     // These variables can be adjusted for each subclass of Weapon.
@@ -22,7 +21,6 @@ public class Weapon : MonoBehaviour
     {
         // Get the rigidbody, sprite renderer, and box collider components of the weapon.
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
 
         // Disable the weapon to start with.
@@ -37,7 +35,6 @@ public class Weapon : MonoBehaviour
         {
             // Enable the weapon and the box collider, and set a timer to disable the weapon.
             EnableWeapon();
-            boxCollider.enabled = true;
             Invoke("DisableWeapon", attackDuration);
 
             // Set a timer to reset the weapon's attack ability.
@@ -48,7 +45,6 @@ public class Weapon : MonoBehaviour
     // Disable the weapon by hiding the sprite and disabling the box collider.
     public void DisableWeapon()
     {
-        sr.enabled = false;
         boxCollider.enabled = false;
     }
 
@@ -56,7 +52,6 @@ public class Weapon : MonoBehaviour
     public void EnableWeapon()
     {
         canAttack = false;
-        sr.enabled = true;
         boxCollider.enabled = true;
     }
 
