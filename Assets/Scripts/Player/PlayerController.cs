@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,12 +9,17 @@ public class PlayerController : MonoBehaviour
     public Weapon defaultWeapon;
     public Weapon equippedWeapon;
     public Transform weaponSlot;
+    public SpriteRenderer sr;
 
     private Camera mainCamera;
     private Vector2 mousePos;
 
+    public float health;
+    public float maxHealth;
+
     private Vector2 movement;
 
+    public TextMeshProUGUI healthDisplay;
 
 
     void Start()
@@ -21,10 +27,15 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
 
         EquipWeapon(defaultWeapon);
+
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
+        health = Mathf.Clamp(health, 0, 100);
+        healthDisplay.text = "Health: " + health;
+
         // Get movement input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
